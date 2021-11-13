@@ -5,19 +5,26 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@github-docs/frontmatter": "^1.3.1",
+    "@github-docs/render-content": "^5.2.1",
+    "@octokit/rest": "^18.12.0",
+    "autoprefixer": "^10.4.0",
     "gatsby": "^4.1.3",
     "gatsby-plugin-gatsby-cloud": "^4.1.1",
     "gatsby-plugin-image": "^2.1.1",
     "gatsby-plugin-manifest": "^4.1.2",
     "gatsby-plugin-offline": "^5.1.2",
+    "gatsby-plugin-postcss": "^5.1.0",
     "gatsby-plugin-react-helmet": "^5.1.0",
     "gatsby-plugin-sharp": "^4.1.2",
     "gatsby-source-filesystem": "^4.1.1",
     "gatsby-transformer-sharp": "^4.1.0",
+    "postcss": "^8.3.11",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "tailwindcss": "^2.2.19"
   },
   "devDependencies": {
     "prettier": "^2.4.1"
