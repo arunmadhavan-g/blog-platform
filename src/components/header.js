@@ -2,31 +2,19 @@ import * as React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
+const Header = ({ isContent = false }) => (
+  <header className="border-b">
+    <div>
+      <p className={`cursor-pointer my-1 font-semibold ${isContent ? "text-base" : "text-3xl"}`}>
+        <Link to="/">
+          TechMusings.dev
         </Link>
-      </h1>
+      </p>
+      {!isContent &&
+        (<p className="text-base my-1">
+          Personal blog by <Link className="cursor-pointer text-blue-900 underline" to="/About">Arun Madhavan</Link>
+        </p>)
+      }
     </div>
   </header>
 )
