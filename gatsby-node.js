@@ -1,3 +1,4 @@
+const {camelCase} = require("lodash");
 const { Octokit } = require("@octokit/rest");
 const frontmatterParser = require('@github-docs/frontmatter')
 const renderContent = require('@github-docs/render-content')
@@ -39,7 +40,6 @@ const getInfoJson = ({title, publishedOn, author, tags, description, owner}) => 
 
 const dataNode = async (createNodeId, page, createContentDigest) => {
   const rawcontent = await downloadContent(page.owner, page.repo, page.file)
-
   const content = await renderContent(rawcontent, {})
 
   let data = {
@@ -53,11 +53,11 @@ const dataNode = async (createNodeId, page, createContentDigest) => {
           rawContent: rawcontent,
           content: content,
           pagePath: page.repo,
+          location: camelCase(page.title)
       },
   }
 
   data.internal.contentDigest = createContentDigest(data)
-
   return data
 }
 

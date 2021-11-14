@@ -17,6 +17,7 @@ const Listing = () => {
                 publishedOn
                 pagePath
                 description
+                location
               }
             }
           }
@@ -29,7 +30,7 @@ const Listing = () => {
         <div className="lg:m-5 sm:m-2 border-b">
             <div className="flex sm:flex-col md:flex-col lg:flex-row my-1">
                 <div className="text-black font-bold flex-auto">
-                    <Link to={x.pagePath}>{x.title}</Link>
+                    <Link to={x.location}>{x.title}</Link>
                 </div>
                 <div className="text-sm text-gray-500">{formatDate(x.publishedOn)}</div>
             </div>
