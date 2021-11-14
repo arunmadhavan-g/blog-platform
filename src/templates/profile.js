@@ -15,7 +15,7 @@ const splitDuration = duration => {
     const toString = parts[1];
 
     const from = dayjs(fromString, "MMM YYYY");
-    const to = toString.includes("Till Date") ? dayjs() : dayjs(fromString, "MMM YYYY");
+    const to = toString.includes("Till Date") ? dayjs() : dayjs(toString, "MMM YYYY");
     return { from, to }
 }
 
@@ -41,23 +41,25 @@ const Content = ({ pageContext: { profileData } }) => {
 
     return (
         <Layout isContent>
-            <div className="my-5">
-                <div className="flex justify-between lg:mr-20">
-                    <div className="text-2xl">Arun Madhavan Govindarajan</div>
-                    <div className="">Image goes here</div>
+            <div>
+                <div className="flex justify-between lg:mr-10 mb-9 p-1">
+                    <div className="lg:text-3xl sm:text-xl md: text-xl">Arun Madhavan Govindarajan</div>
+                    <div className="float-left h-0 object-fill relative lg:w-2/12 md:w-1/3 sm:w-1/3"><img src="https://avatars.githubusercontent.com/u/1178415?v=4" /></div>
                 </div>
-                <div className="my-3 border-b py-2">
+                <div className="my-3 border-b py-2.5">
                     <div className="text-sm grid lg:grid-cols-4 gap-1 md:grid-cols-1 sm:grid-cols-1">
                         <div><Link to="https://www.linkedin.com/in/arunmadhavang/"><FontAwesomeIcon icon={faLinkedin} /> @arunmadhavang</Link></div>
                         <div><Link to="https://techmusings.dev/"><FontAwesomeIcon icon={faPen} /> https://techmusings.dev/</Link></div>
                         <div className="lg:col-span-2"><Link to="https://github.com/arunmadhavan-g"><FontAwesomeIcon icon={faGithub} /> @arunmadhavan-g</Link></div>
-                        <div><Link to="mailto:arunmadhavan.g@gmail.com"><FontAwesomeIcon icon={faEnvelopeOpen} /> arunmadhavan.g@gmail.com</Link></div>
-                        <div className="lg:col-span-3"><Link to="callto:+919840808667"><FontAwesomeIcon icon={faPhone} />+91 98408 08667</Link></div>
+                        <div><a href="mailto:arunmadhavan.g@gmail.com"><FontAwesomeIcon icon={faEnvelopeOpen} /> arunmadhavan.g@gmail.com</a></div>
+                        <div className="lg:col-span-3"><a href="callto:+919840808667"><FontAwesomeIcon icon={faPhone} />+91 98408 08667</a></div>
                     </div>
                 </div>
 
                 <Section title="Summary">
-                    {achievements.map(x => <div>{x}</div>)}
+                    <ul className="list-disc">
+                    {achievements.map(x => <li>{x}</li>)}
+                    </ul>
                 </Section>
 
                 <Section title="Technologies">
@@ -81,9 +83,9 @@ const Content = ({ pageContext: { profileData } }) => {
                     }
                 </Section>
 
-                <Section title="Project Experience">
+                <Section title="Project Summary">
                     {profileData.map(x => (
-                        <div>
+                        <div className="border-b border-dashed">
                             <div className="text-black">{x.projectName} <span className="text-gray-600"> - {x.company}</span></div>
                             <div className="flex justify-between lg:mr-36 mb-2 text-gray-600 text-sm">
                                 <div>Role: {x.role}</div>
@@ -97,9 +99,9 @@ const Content = ({ pageContext: { profileData } }) => {
                 <Section title="Project Details">
                     <div>
                         {profileData.map(x => (
-                            <div className="border-b">
+                            <div className="border-b-2 mt-5">
                                 <div className="text-black">{x.projectName} <span className="text-gray-600"> - {x.company}</span></div>
-                                <div className="flex justify-between lg:pr-36 mb-2 text-gray-600 text-sm border-b">
+                                <div className="flex justify-between lg:pr-36 mb-2 text-gray-600 text-sm border-b border-dashed">
                                     <div>{x.role}</div>
                                     <div>{x.duration}</div>
                                 </div>

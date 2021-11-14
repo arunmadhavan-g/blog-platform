@@ -71,15 +71,16 @@ exports.sourceNodes = async ({node, actions, createNodeId, createContentDigest},
   .filter(x => x.name.includes("Project"))
   .map(async x => ({...x, content: (await downloadContent( "arunmadhavan-g", "Profile", x.path))}))
   .map(async x => {
-    const { data, content } = frontmatterParser((await x).content);
+    const awaitedX = await x;
+    const { data, content } = frontmatterParser(awaitedX.content);
     return ({
-    id: createNodeId(`${x.name}-repoRecords`),
+    id: createNodeId(`${awaitedX.name}-repoRecords`),
           children: [],
           internal: {
               type: `repoRecords`,
           },
           pageInfo: {
-            ...(await x), 
+            ...awaitedX, 
             htmlContent: await renderContent(content, {}),
             frontmatter: data,
           },
