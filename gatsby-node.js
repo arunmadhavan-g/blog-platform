@@ -3,6 +3,7 @@ const { Octokit } = require("@octokit/rest");
 const frontmatterParser = require('@github-docs/frontmatter')
 const renderContent = require('@github-docs/render-content')
 const {pages} = require("./config")
+const { formatDate } = require("./src/helpers/format");
 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions
@@ -29,13 +30,9 @@ const downloadContent = async (owner, repo, path) => {
   return Buffer.from(data.content, 'base64').toString('utf-8');
 }
 
-const getInfoJson = ({title, publishedOn, author, tags, description, owner}) => ({
-  title,
-  publishedOn,
-  author,
-  tags,
-  description,
-  owner
+const getInfoJson = ({ publishedOn, ...others}) => ({
+  ...others, 
+  publishedOn: formatDate(publishedOn)
 })
 
 const dataNode = async (createNodeId, page, createContentDigest) => {
@@ -101,3 +98,39 @@ exports.sourceNodes = async ({node, actions, createNodeId, createContentDigest},
 
   
 };
+
+exports.createPages = async ({ graphql, actions: { createPage } }) => {
+
+  (await graphql(`query MyQuery {
+    allMultiGitSource {
+      edges {
+        node {
+          pageInfo {
+            title
+            tags
+            publishedOn
+            location
+            repo
+            content
+            pagePath
+            owner
+            file
+          }
+        }
+      }
+    }
+  }
+  `))
+  .data
+  .allMultiGitSource
+  .edges
+  .map(x => x.node.pageInfo)
+  .forEach(page => {
+    createPage({
+      path: `/${page.location}`,
+      component: require.resolve("./src/templates/content.js"),
+      context: { ...page },
+    })
+  })
+
+}

@@ -2,7 +2,6 @@ import * as React from "react"
 import PropTypes, { node } from "prop-types"
 import { useStaticQuery, graphql, Link } from "gatsby"
 import Tags from "./tags"
-import { formatDate } from "../helpers/format"
 
 const Listing = () => {
 
@@ -32,15 +31,12 @@ const Listing = () => {
                 <div className="text-black font-bold flex-auto">
                     <Link to={x.location}>{x.title}</Link>
                 </div>
-                <div className="text-sm text-gray-500">{formatDate(x.publishedOn)}</div>
+                <div className="text-sm text-gray-500">{x.publishedOn}</div>
             </div>
             <div className="text-sm text-gray-600 my-1">{x.description}</div>
             <Tags tags={x.tags} /> 
         </div>
     )
-
-
-
 }
 
 export default Listing
