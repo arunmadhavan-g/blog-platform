@@ -31,13 +31,13 @@ const Section = ({ children, title }) =>
 
 const Content = ({ pageContext: { profileData } }) => {
 
-    const achievements = profileData.flatMap(x => x.achievements)
+    const achievements = profileData.flatMap(x => x.achievements).filter(x => !_.isEmpty(x))
     const techList = [...new Set(profileData.flatMap(x => x.tech))]
     const projectSummary = _.groupBy(
         profileData
-            .map(x => ({ ...x, ...splitDuration(x.duration) }))
+            .map(x => ({ ...x, ...splitDuration(x.duration), companyName: x.company.trim() }))
             .sort((x, y) => y.from.diff(x.from))
-        , "company")
+        , "companyName")
 
     return (
         <Layout isContent>
