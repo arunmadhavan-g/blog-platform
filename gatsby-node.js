@@ -133,4 +133,36 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     })
   })
 
+
+  const profileData = (await graphql(`query MyQuery {
+    allRepoRecords {
+      edges {
+        node {
+          pageInfo {
+            htmlContent
+            frontmatter {
+              achievements
+              company
+              duration
+              projectName
+              role
+              tech
+            }
+          }
+        }
+      }
+    }
+  }`))
+  .data
+  .allRepoRecords
+  .edges
+  .map(x => x.node.pageInfo)
+  .map(x => ({...x.frontmatter, htmlContent: x.htmlContent}))
+
+  createPage({
+    path: `/About`,
+    component: require.resolve("./src/templates/profile.js"),
+    context: { profileData },
+  })
+
 }
