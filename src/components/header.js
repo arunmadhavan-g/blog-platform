@@ -5,7 +5,7 @@ import { Link } from "gatsby"
 const Header = ({ isContent = false }) => (
   <header className="border-b">
     <div>
-      <p className={`cursor-pointer my-1 font-semibold ${isContent ? "text-base" : "text-3xl"}`}>
+      <p className={`cursor-pointer my-1 font-semibold ${isContent ? "text-base" : "lg:text-3xl md:text-2xl sm:text-2xl"}`}>
         <Link to="/">
           TechMusings.dev
         </Link>

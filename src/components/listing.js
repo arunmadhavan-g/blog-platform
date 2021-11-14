@@ -26,8 +26,8 @@ const Listing = () => {
     console.log(blogs);
 
     return blogs.map(x => 
-        <div className="m-5 border-b">
-            <div className="flex my-1">
+        <div className="lg:m-5 sm:m-2 border-b">
+            <div className="flex sm:flex-col md:flex-col lg:flex-row my-1">
                 <div className="text-black font-bold flex-auto">
                     <Link to={x.pagePath}>{x.title}</Link>
                 </div>
