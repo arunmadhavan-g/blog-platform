@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, {useRef} from "react"
 import _ from "lodash";
 import dayjs from "dayjs";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,7 +9,7 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import Tags from "../components/tags";
 
-const splitDuration = duration => {
+const splitDuration = (duration,  companyName) => {
     const parts = duration.split("-").map(x => x.trim());
     const fromString = parts[0];
     const toString = parts[1];
@@ -21,32 +21,32 @@ const splitDuration = duration => {
 
 const isToday = (day) => day.format("MMM YYYY") === dayjs().format("MMM YYYY")
 
-const Section = ({ children, title }) =>
-    <div className="py-2 border-b mb-2">
-        <div class="text-black font-bold text-xl mb-2">{title}</div>
+const Section = ({ children, title, className }) =>
+    <div className={`border-b mb-2 ${className}`}>
+        <div class="text-black font-bold text-base mb-2">{title}</div>
         <div className="px-2">
             {children}
         </div>
     </div>
 
 const Content = ({ pageContext: { profileData } }) => {
-
     const achievements = profileData.flatMap(x => x.achievements).filter(x => !_.isEmpty(x))
-    const techList = [...new Set(profileData.flatMap(x => x.tech))]
+    const techList = [...new Set(profileData.flatMap(x => x.tech).filter(x => !_.isEmpty(x)))]
     const projectSummary = _.groupBy(
         profileData
+            .filter(x => !_.isEmpty(x.projectName))
             .map(x => ({ ...x, ...splitDuration(x.duration), companyName: x.company.trim() }))
             .sort((x, y) => y.from.diff(x.from))
         , "companyName")
 
     return (
         <Layout isContent>
-            <div>
-                <div className="flex justify-between lg:mr-10 mb-9 p-1">
-                    <div className="lg:text-3xl sm:text-xl md: text-xl">Arun Madhavan Govindarajan</div>
-                    <div className="float-left h-0 object-fill relative lg:w-2/12 md:w-1/3 sm:w-1/3"><img src="https://avatars.githubusercontent.com/u/1178415?v=4" /></div>
+            <div id="profile" className="md:text-sm lg:text-base text-sm">
+                <div className="flex justify-between lg:mr-10 lg:mb-9 md:mb-0 sm:mb-0 p-1">
+                    <div className="lg:text-3xl sm:text-xl md:text-2xl text-2xl">Arun Madhavan Govindarajan</div>
+                    <div className="float-left h-0 lg:w-2/12 md:w-1/5 object-fill relative w-1/5"><img src="https://avatars.githubusercontent.com/u/1178415?v=4"  alt="profile pic"/></div>
                 </div>
-                <div className="my-3 border-b py-2.5">
+                <div className="border-b md:pt-0 mt-3 lg:pt-5 sm:pt-0">
                     <div className="text-sm grid lg:grid-cols-4 gap-1 md:grid-cols-1 sm:grid-cols-1">
                         <div><Link to="https://www.linkedin.com/in/arunmadhavang/"><FontAwesomeIcon icon={faLinkedin} /> @arunmadhavang</Link></div>
                         <div><Link to="https://techmusings.dev/"><FontAwesomeIcon icon={faPen} /> https://techmusings.dev/</Link></div>
@@ -56,9 +56,9 @@ const Content = ({ pageContext: { profileData } }) => {
                     </div>
                 </div>
 
-                <Section title="Summary">
-                    <ul className="list-disc">
-                    {achievements.map(x => <li>{x}</li>)}
+                <Section title="Summary" className="mt-1">
+                    <ul className="list-disc pb-0">
+                    {achievements.map(x => <li className="mb-0">{x}</li>)}
                     </ul>
                 </Section>
 
@@ -72,11 +72,13 @@ const Content = ({ pageContext: { profileData } }) => {
                             .keys(projectSummary)
                             .map(company => {
                                 const sortedSummary = projectSummary[company].sort((x, y) => y.from.diff(x.from))
-                                const toDate = _.last(sortedSummary).to;
+                                const {from} = _.last(sortedSummary);
+                                const {to} = sortedSummary[0]
+                            
                                 return (
                                     <div className="flex justify-between lg:mr-36">
                                         <div className="col-span-4 text-black">{company}</div>
-                                        <div>{sortedSummary[0].from.format('MMM YYYY')}  - {isToday(toDate) ? "Till Date" : toDate.format('MMM YYYY')}</div>
+                                        <div>{from.format('MMM YYYY')}  - {isToday(to) ? "Till Date" : to.format('MMM YYYY')}</div>
                                     </div>
                                 )
                             })
@@ -84,7 +86,7 @@ const Content = ({ pageContext: { profileData } }) => {
                 </Section>
 
                 <Section title="Project Summary">
-                    {profileData.map(x => (
+                    {profileData.filter(x => !_.isEmpty(x.projectName)).map(x => (
                         <div className="border-b border-dashed">
                             <div className="text-black">{x.projectName} <span className="text-gray-600"> - {x.company}</span></div>
                             <div className="flex justify-between lg:mr-36 mb-2 text-gray-600 text-sm">
@@ -98,9 +100,9 @@ const Content = ({ pageContext: { profileData } }) => {
 
                 <Section title="Project Details">
                     <div>
-                        {profileData.map(x => (
+                        {profileData.filter(x => !_.isEmpty(x.projectName)).map(x => (
                             <div className="border-b-2 mt-5">
-                                <div className="text-black">{x.projectName} <span className="text-gray-600"> - {x.company}</span></div>
+                                <div className="text-black text-base">{x.projectName} <span className="text-gray-600"> - {x.company}</span></div>
                                 <div className="flex justify-between lg:pr-36 mb-2 text-gray-600 text-sm border-b border-dashed">
                                     <div>{x.role}</div>
                                     <div>{x.duration}</div>
@@ -111,8 +113,6 @@ const Content = ({ pageContext: { profileData } }) => {
                         ))}
                     </div>
                 </Section>
-                
-
             </div>
         </Layout>)
 

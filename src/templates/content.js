@@ -24,11 +24,14 @@ const updateSrc = (tagName, property, pagePath) => {
     }
   }
 
+
 const Content = ({ pageContext }) => {
     
     useEffect(() => {
         updateSrc("img", "src", `${pageContext.owner}/${pageContext.repo}/raw/master`)
         updateSrc("a", "href", `${pageContext.owner}/${pageContext.repo}/blob/master`)
+        updateSrc("li", "class", `mb-0`)
+        updateSrc("ul", "class", `list-disc`)
     })
 
     return (

@@ -1,9 +1,22 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPrint } from "@fortawesome/free-solid-svg-icons"
+
+const print = () => {
+  document.getElementById("header").style.display = "none"
+  document.getElementById("footer").style.display = "none"
+
+  window.print()
+
+  document.getElementById("header").style.display = "none"
+  document.getElementById("footer").style.display = "none"
+
+}
 
 const Header = ({ isContent = false }) => (
-  <header className="border-b">
+  <header id="header" className="border-b flex justify-between">
     <div>
       <p className={`cursor-pointer my-1 font-semibold ${isContent ? "text-base" : "lg:text-3xl md:text-2xl sm:text-2xl"}`}>
         <Link to="/">
@@ -16,6 +29,11 @@ const Header = ({ isContent = false }) => (
         </p>)
       }
     </div>
+    { isContent && 
+      (<div>
+        <FontAwesomeIcon icon={faPrint} onClick={() => print()} className="cursor-pointer"/>
+      </div>)
+    }
   </header>
 )
 
