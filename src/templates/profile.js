@@ -63,7 +63,7 @@ const Content = ({ pageContext: { profileData } }) => {
                 </Section>
 
                 <Section title="Technologies">
-                    <Tags tags={techList} />
+                    <Tags color="gray" tags={techList} />
                 </Section>
 
                 <Section title="Company Experience">
@@ -87,18 +87,22 @@ const Content = ({ pageContext: { profileData } }) => {
 
                 <Section title="Project Summary">
                     {profileData.filter(x => !_.isEmpty(x.projectName)).map(x => (
-                        <div className="border-b border-dashed">
-                            <div className="text-black">{x.projectName} <span className="text-gray-600"> - {x.company}</span></div>
-                            <div className="flex justify-between lg:mr-36 mb-2 text-gray-600 text-sm">
+                        <div>
+                            <div className="p-1 text-black bg-gray-100 lg:mr-10">{x.projectName} <span className="text-gray-600"> - {x.company}</span></div>
+                            <div className="py-1 px-1.5 flex bg-gray-100 justify-between lg:mr-10 mb-2 text-gray-600 text-sm">
                                 <div>Role: {x.role}</div>
                                 <div>{x.duration}</div>
                             </div>
-                            <Tags tags={x.tech} />
+                            <div className="lg:mr-10 px-1.5"> {x.shortDescription}</div>
+
+                            {!_.isEmpty(x.tech) && <div className="m-2 text-small text-gray-600 italic">{x.tech.join(", ")}</div>}
+                        
+                            
                         </div>
                     ))}
                 </Section>
 
-                <Section title="Project Details">
+                {/* <Section title="Project Details">
                     <div>
                         {profileData.filter(x => !_.isEmpty(x.projectName)).map(x => (
                             <div className="border-b-2 mt-5">
@@ -112,7 +116,7 @@ const Content = ({ pageContext: { profileData } }) => {
                             </div>
                         ))}
                     </div>
-                </Section>
+                </Section> */}
             </div>
         </Layout>)
 

@@ -148,6 +148,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
               projectName
               role
               tech
+              shortDescription
             }
           }
         }
