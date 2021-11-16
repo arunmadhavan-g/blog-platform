@@ -4,12 +4,16 @@ import dayjs from "dayjs";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
 import { faEnvelopeOpen } from "@fortawesome/free-regular-svg-icons"
-import { faPhone, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faPen, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "gatsby"
 import Layout from "../components/layout"
 import Tags from "../components/tags";
 
-const splitDuration = (duration,  companyName) => {
+const splitDuration = (duration) => {
+    if(_.isEmpty(duration)){
+        return {from: null, to:null}
+    }
+    
     const parts = duration.split("-").map(x => x.trim());
     const fromString = parts[0];
     const toString = parts[1];
@@ -17,25 +21,45 @@ const splitDuration = (duration,  companyName) => {
     const from = dayjs(fromString, "MMM YYYY");
     const to = toString.includes("Till Date") ? dayjs() : dayjs(toString, "MMM YYYY");
     return { from, to }
+    
 }
 
+const isWithin5Years = (day, projectName) => {
+    const todayMinus5Years= dayjs().subtract(5, 'year')
+    return day.isAfter(todayMinus5Years)
+}
 const isToday = (day) => day.format("MMM YYYY") === dayjs().format("MMM YYYY")
 
 const Section = ({ children, title, className }) =>
-    <div className={`border-b mb-2 ${className}`}>
+    <div className={`border-b mb-0 ${className}`}>
         <div class="text-black font-bold text-base mb-2">{title}</div>
         <div className="px-2">
             {children}
         </div>
     </div>
 
+const getTechList = (profileData) => {    
+    const techs= profileData.map(x => x.tech).filter( x => !_.isEmpty(x))
+    const fnl = {label: "Framework and Languages", value:[...new Set(techs.filter(x => !_.isEmpty(x.fnl)).flatMap(x => x.fnl))]};
+    const cni = {label: "Cloud and Infra", value:[...new Set(techs.filter(x => !_.isEmpty(x.cni)).flatMap(x => x.cni))]};
+    const ds = {label: "Data Stores", value:[...new Set(techs.filter(x => !_.isEmpty(x.ds)).flatMap(x => x.ds))]};
+    const cicd = {label: "Build & CICD", value:[...new Set(techs.filter(x => !_.isEmpty(x.cicd)).flatMap(x => x.cicd))]};
+    const fe = {label: "Front End", value:[...new Set(techs.filter(x => !_.isEmpty(x.fe)).flatMap(x => x.fe))]};
+    const otp = {label: "Other Tools and Processes", value:[...new Set(techs.filter(x => !_.isEmpty(x.otp)).flatMap(x => x.otp))]};
+    
+    return [fnl, cni, ds, cicd, fe, otp]
+} 
+
+const mergedTech = (techs) => Object.keys(techs).flatMap(x => techs[x]).filter(x => !_.isEmpty(x))
+
 const Content = ({ pageContext: { profileData } }) => {
     const achievements = profileData.flatMap(x => x.achievements).filter(x => !_.isEmpty(x))
-    const techList = [...new Set(profileData.flatMap(x => x.tech).filter(x => !_.isEmpty(x)))]
+    const summary = profileData.flatMap(x => x.summary).filter(x => !_.isEmpty(x))
+    const techList = getTechList(profileData)//[...new Set(profileData.flatMap(x => x.tech).filter(x => !_.isEmpty(x)))]
+    const profileDataWithDates = profileData.map(x => ({ ...x, ...splitDuration(x.duration), companyName: (_.isEmpty(x.company)? null: x.company.trim()) }))
     const projectSummary = _.groupBy(
-        profileData
+        profileDataWithDates
             .filter(x => !_.isEmpty(x.projectName))
-            .map(x => ({ ...x, ...splitDuration(x.duration), companyName: x.company.trim() }))
             .sort((x, y) => y.from.diff(x.from))
         , "companyName")
 
@@ -57,13 +81,23 @@ const Content = ({ pageContext: { profileData } }) => {
                 </div>
 
                 <Section title="Summary" className="mt-1">
-                    <ul className="list-disc pb-0">
-                    {achievements.map(x => <li className="mb-0">{x}</li>)}
+                    <ul className="list-disc pb-0 mb-1.5">
+                    {summary.map(x => <li className="mb-0">{x}</li>)}
                     </ul>
                 </Section>
 
                 <Section title="Technologies">
-                    <Tags color="gray" tags={techList} />
+                <div className="grid grid-cols-5 gap-1 mb-1 ml-2">
+                        {
+                            techList.map(x => (
+                                <>      
+                                <div className="text-black border-b border-dashed">{x.label}</div>
+                                <div className="italic col-span-4 border-b border-dashed">{x.value.join(", ")}</div>
+                                </>
+                                )
+                            )
+                        }
+                    </div>
                 </Section>
 
                 <Section title="Company Experience">
@@ -85,8 +119,17 @@ const Content = ({ pageContext: { profileData } }) => {
                     }
                 </Section>
 
+                <Section title="Achievements" className="mt-1">
+                    <ul className="list-disc pb-0">
+                    {achievements.map(x => <li className="mb-0">{x}</li>)}
+                    </ul>
+                </Section>
+
                 <Section title="Project Summary">
-                    {profileData.filter(x => !_.isEmpty(x.projectName)).map(x => (
+                    {profileDataWithDates
+                    .filter(x => !_.isEmpty(x.projectName))
+                    .filter(x => isWithin5Years(x.to, x))
+                    .map(x => (
                         <div>
                             <div className="p-1 text-black bg-gray-100 lg:mr-10">{x.projectName} <span className="text-gray-600"> - {x.company}</span></div>
                             <div className="py-1 px-1.5 flex bg-gray-100 justify-between lg:mr-10 mb-2 text-gray-600 text-sm">
@@ -95,7 +138,7 @@ const Content = ({ pageContext: { profileData } }) => {
                             </div>
                             <div className="lg:mr-10 px-1.5"> {x.shortDescription}</div>
 
-                            {!_.isEmpty(x.tech) && <div className="m-2 text-small text-gray-600 italic">{x.tech.join(", ")}</div>}
+                            {!_.isEmpty(x.tech) && <div className="m-2 text-small text-gray-600 italic px-1.5">{mergedTech(x.tech).join(", ")}</div>}
                         
                             
                         </div>

@@ -19,7 +19,7 @@ const Layout = ({ children, isContent=false }) => {
   `)
 
   return (
-    <div class="container mx-auto my-10">
+    <div class="container mx-auto my-5">
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} isContent={isContent}/>
       <div>
         <main>{children}</main>

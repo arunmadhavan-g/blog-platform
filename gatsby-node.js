@@ -147,7 +147,15 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
               duration
               projectName
               role
-              tech
+              summary
+              tech {
+                fnl
+                cni
+                ds
+                cicd
+                fe
+                otp
+              }
               shortDescription
             }
           }
