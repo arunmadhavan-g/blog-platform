@@ -54,10 +54,26 @@ a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 }
-a:active,
+p > a{
+  color: blue;
+}
+a:active{
+  color: blue;
+  outline-width: 0;
+}
+
 a:hover {
   outline-width: 0;
 }
+
+header a{
+  color: black;
+}
+
+a:visited{
+  /* color: hotpink; */
+}
+
 abbr[title] {
   border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);
   cursor: help;
@@ -130,6 +146,7 @@ samp {
   font-family: monospace;
   font-size: 1em;
 }
+
 figure {
   margin-left: 0;
   margin-right: 0;
@@ -355,7 +372,7 @@ ul {
   padding-top: 0;
   margin-bottom: 1.45rem;
   list-style-position: outside;
-  list-style-image: none;
+  list-style: disc;
 }
 ol {
   margin-left: 1.45rem;
@@ -367,7 +384,7 @@ ol {
   padding-top: 0;
   margin-bottom: 1.45rem;
   list-style-position: outside;
-  list-style-image: none;
+  list-style: disc;
 }
 dl {
   margin-left: 0;
@@ -400,7 +417,7 @@ p {
   margin-bottom: 1.45rem;
 }
 pre {
-  margin-left: 0;
+  /* margin-left: 0;
   margin-right: 0;
   margin-top: 0;
   margin-bottom: 1.45rem;
@@ -410,7 +427,13 @@ pre {
   border-radius: 3px;
   overflow: auto;
   word-wrap: normal;
-  padding: 1.45rem;
+  padding: 1.45rem; */
+
+  background: #333;
+  white-space: pre;
+  word-wrap: break-word;
+  overflow: auto;
+
 }
 table {
   margin-left: 0;
@@ -506,6 +529,7 @@ li > ul {
   margin-left: 1.45rem;
   margin-bottom: calc(1.45rem / 2);
   margin-top: calc(1.45rem / 2);
+  list-style-image: circle;
 }
 blockquote *:last-child {
   margin-bottom: 0;
@@ -574,9 +598,22 @@ code {
   padding-bottom: 0.2em;
 }
 pre code {
-  background: none;
-  line-height: 1.42;
+  /* background: none; */
+  margin: 20px 25px;
+  border-radius: 4px;
+  border: 1px solid #292929;
+  position: relative;
+  font-family: "Inconsolata","Monaco","Consolas","Andale Mono","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+  display: block;
+  margin: 0 0 0 60px;
+  padding: 15px 16px 14px;
+  border-left: 1px solid #555;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 19px;
+  color: #ddd;
 }
+
 code:before,
 code:after,
 tt:before,

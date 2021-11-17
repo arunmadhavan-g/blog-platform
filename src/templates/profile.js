@@ -64,7 +64,7 @@ const Content = ({ pageContext: { profileData } }) => {
         , "companyName")
 
     return (
-        <Layout isContent>
+        <Layout isContent showPrint>
             <div id="profile" className="md:text-sm lg:text-base text-sm">
                 <div className="flex justify-between lg:mr-10 lg:mb-9 md:mb-0 sm:mb-0 p-1">
                     <div className="lg:text-3xl sm:text-xl md:text-2xl text-2xl">Arun Madhavan Govindarajan</div>

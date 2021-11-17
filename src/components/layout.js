@@ -6,7 +6,7 @@ import Header from "./header"
 import Footer from "./footer"
 import "./layout.css"
 
-const Layout = ({ children, isContent=false }) => {
+const Layout = ({ children, isContent=false, showPrint=false }) => {
   
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -20,7 +20,7 @@ const Layout = ({ children, isContent=false }) => {
 
   return (
     <div class="container mx-auto my-5">
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} isContent={isContent}/>
+      <Header siteTitle={data.site.siteMetadata?.title || `Title`} isContent={isContent} showPrint={showPrint}/>
       <div>
         <main>{children}</main>
         <Footer/>

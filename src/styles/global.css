@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.htmlContent > ul{
+    list-style-type: disc;
+    padding-bottom: 0;
+    margin-bottom: 15px;
+}
+
+.htmlContent > li{
+    padding-bottom: 0;
+}

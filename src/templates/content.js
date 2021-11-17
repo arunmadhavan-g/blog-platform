@@ -47,7 +47,7 @@ const Content = ({ pageContext }) => {
                     </div>
                 </div>
                 <Tags tags={pageContext.tags} />
-                <div className="border-t py-4" id="preview" dangerouslySetInnerHTML={{ __html: pageContext.content }} />
+                <div className="border-t py-4 htmlContent" id="preview" dangerouslySetInnerHTML={{ __html: pageContext.content }} />
             </div>
         </Layout>
     )

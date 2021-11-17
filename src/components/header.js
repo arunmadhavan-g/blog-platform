@@ -15,7 +15,7 @@ const print = () => {
 
 }
 
-const Header = ({ isContent = false }) => (
+const Header = ({ isContent = false, showPrint = false }) => (
   <header id="header" className="border-b flex justify-between">
     <div>
       <p className={`cursor-pointer my-1 font-semibold ${isContent ? "text-base" : "lg:text-3xl md:text-2xl sm:text-2xl"}`}>
@@ -29,7 +29,7 @@ const Header = ({ isContent = false }) => (
         </p>)
       }
     </div>
-    { isContent && 
+    { showPrint && 
       (<div>
         <FontAwesomeIcon icon={faPrint} onClick={() => print()} className="cursor-pointer"/>
       </div>)
