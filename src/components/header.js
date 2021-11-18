@@ -7,11 +7,13 @@ import { faPrint } from "@fortawesome/free-solid-svg-icons"
 const print = () => {
   document.getElementById("header").style.display = "none"
   document.getElementById("footer").style.display = "none"
+  document.getElementById("phone").style.display = "block"
 
   window.print()
 
-  document.getElementById("header").style.display = "none"
-  document.getElementById("footer").style.display = "none"
+  document.getElementById("header").style.display = "block"
+  document.getElementById("footer").style.display = "block"
+  document.getElementById("phone").style.display = "none"
 
 }
 
