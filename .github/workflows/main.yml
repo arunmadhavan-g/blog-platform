@@ -30,6 +30,7 @@ jobs:
         GIT_TOKEN: ${{ secrets.GITHUBTOKEN }}
     - run: npm install -g gatsby-cli
     - run: npm install
+    - run: echo $GIT_TOKEN
     - run: gatsby build --prefix-paths
     # - run: cp CNAME public
 
