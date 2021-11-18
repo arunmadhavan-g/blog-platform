@@ -53,7 +53,7 @@ const pages = [
   
   const titleImage = "src/images/tech-musings.png"
   
-  const pathPrefix = "/demo-platform"
+  const pathPrefix = "/blog-platform"
   
   const siteMetadata = {
     title: `Tech Musings.dev`,
