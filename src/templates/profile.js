@@ -4,10 +4,9 @@ import dayjs from "dayjs";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
 import { faEnvelopeOpen } from "@fortawesome/free-regular-svg-icons"
-import { faPhone, faPen, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faPen } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "gatsby"
 import Layout from "../components/layout"
-import Tags from "../components/tags";
 
 const splitDuration = (duration) => {
     if(_.isEmpty(duration)){
@@ -24,11 +23,11 @@ const splitDuration = (duration) => {
     
 }
 
-const isWithin5Years = (day, projectName) => {
+const isWithin5Years = day => {
     const todayMinus5Years= dayjs().subtract(5, 'year')
     return day.isAfter(todayMinus5Years)
 }
-const isToday = (day) => day.format("MMM YYYY") === dayjs().format("MMM YYYY")
+const isToday = day => day.format("MMM YYYY") === dayjs().format("MMM YYYY")
 
 const Section = ({ children, title, className }) =>
     <div className={`border-b mb-0 ${className}`}>
@@ -66,11 +65,10 @@ const Content = ({ pageContext: { profileData } }) => {
     return (
         <Layout isContent showPrint>
             <div id="profile" className="md:text-sm lg:text-base text-sm">
-                <div className="flex justify-between lg:mr-10 lg:mb-9 md:mb-0 sm:mb-0 p-1">
+                <div className="flex justify-between lg:mb-2 md:mb-0 sm:mb-0 p-1">
                     <div className="lg:text-3xl sm:text-xl md:text-2xl text-2xl">Arun Madhavan Govindarajan</div>
-                    <div className="float-left h-0 lg:w-2/12 md:w-1/5 object-fill relative w-1/5"><img src="https://avatars.githubusercontent.com/u/1178415?v=4"  alt="profile pic"/></div>
                 </div>
-                <div className="border-b md:pt-0 mt-3 lg:pt-5 sm:pt-0">
+                <div className="border-b md:pt-0 mt-1 lg:pt-2 sm:pt-0">
                     <div className="text-sm grid lg:grid-cols-4 gap-1 md:grid-cols-1 sm:grid-cols-1">
                         <div><Link to="https://www.linkedin.com/in/arunmadhavang/"><FontAwesomeIcon icon={faLinkedin} /> @arunmadhavang</Link></div>
                         <div><Link to="https://techmusings.dev/"><FontAwesomeIcon icon={faPen} /> https://techmusings.dev/</Link></div>
