@@ -32,9 +32,9 @@ jobs:
       shell: bash
       env: 
         GIT_TOKEN: ${{ secrets.GITHUBTOKEN }}
-      run: echo $GIT_TOKEN && gatsby build --prefix-paths
+      run: gatsby build
       
-    # - run: cp CNAME public
+    - run: cp CNAME public
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
