@@ -8,8 +8,8 @@ import { faPhone, faPen, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const About = () =>
     <Layout isContent>
-        <div className="m-10">
-            <div className="box-border border-2 flex border-gray-100">
+        <div className="lg:m-5 sm:m-2 md:m-2">
+            <div className="box-border border-2 lg:flex border-gray-100">
                 <div className="m-4 flex-none"><img className="m-0" src="https://avatars.githubusercontent.com/u/1178415?v=4"  alt="profile pic"/></div>
                 <div className="m-5">
                     <p className="mb-1">Hello Everybody, I'm</p>
