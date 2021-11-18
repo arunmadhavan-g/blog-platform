@@ -28,7 +28,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install -g gatsby-cli
     - run: npm install
-    - shell: build
     - shell: bash
       env: 
         GIT_TOKEN: ${{ secrets.GITHUBTOKEN }}
