@@ -26,12 +26,14 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-      env: 
-        GIT_TOKEN: ${{ secrets.GITHUBTOKEN }}
     - run: npm install -g gatsby-cli
     - run: npm install
-    - run: echo $GIT_TOKEN
-    - run: gatsby build --prefix-paths
+    - shell: build
+    - shell: bash
+      env: 
+        GIT_TOKEN: ${{ secrets.GITHUBTOKEN }}
+      run: gatsby build --prefix-paths
+      
     # - run: cp CNAME public
 
     - name: Deploy
