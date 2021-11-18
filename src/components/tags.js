@@ -1,8 +1,7 @@
 import * as React from "react"
 import _ from "lodash"
-import PropTypes from "prop-types"
 
-const Tags = ({ tags, color="blue" }) => (
+const Tags = ({ tags, color="gray" }) => (
     !_.isEmpty(tags) &&
     (<div className="flex justify-start mb-2 flex-wrap">
         {
