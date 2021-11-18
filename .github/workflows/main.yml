@@ -31,7 +31,7 @@ jobs:
     - shell: bash
       env: 
         GIT_TOKEN: ${{ secrets.GITHUBTOKEN }}
-      run: gatsby build --prefix-paths
+      run: echo $GIT_TOKEN && gatsby build --prefix-paths
       
     # - run: cp CNAME public
 
