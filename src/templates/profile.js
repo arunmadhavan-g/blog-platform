@@ -42,7 +42,7 @@ const getTechList = (profileData) => {
     const fnl = {label: "Framework and Languages", value:[...new Set(techs.filter(x => !_.isEmpty(x.fnl)).flatMap(x => x.fnl))]};
     const cni = {label: "Cloud and Infra", value:[...new Set(techs.filter(x => !_.isEmpty(x.cni)).flatMap(x => x.cni))]};
     const ds = {label: "Data Stores", value:[...new Set(techs.filter(x => !_.isEmpty(x.ds)).flatMap(x => x.ds))]};
-    const cicd = {label: "Build & CICD", value:[...new Set(techs.filter(x => !_.isEmpty(x.cicd)).flatMap(x => x.cicd))]};
+    const cicd = {label: "Build & CI/CD", value:[...new Set(techs.filter(x => !_.isEmpty(x.cicd)).flatMap(x => x.cicd))]};
     const fe = {label: "Front End", value:[...new Set(techs.filter(x => !_.isEmpty(x.fe)).flatMap(x => x.fe))]};
     const otp = {label: "Other Tools and Processes", value:[...new Set(techs.filter(x => !_.isEmpty(x.otp)).flatMap(x => x.otp))]};
     
@@ -69,13 +69,21 @@ const Content = ({ pageContext: { profileData } }) => {
                     <div className="lg:text-3xl sm:text-xl md:text-2xl text-2xl">Arun Madhavan Govindarajan</div>
                 </div>
                 <div className="border-b md:pt-0 mt-1 lg:pt-2 sm:pt-0">
-                    <div className="text-sm grid lg:grid-cols-4 gap-1 md:grid-cols-1 sm:grid-cols-1">
-                        <div><Link to="https://www.linkedin.com/in/arunmadhavang/"><FontAwesomeIcon icon={faLinkedin} /> @arunmadhavang</Link></div>
-                        <div><Link to="https://techmusings.dev/"><FontAwesomeIcon icon={faPen} /> https://techmusings.dev/</Link></div>
-                        <div className="lg:col-span-2"><Link to="https://github.com/arunmadhavan-g"><FontAwesomeIcon icon={faGithub} /> @arunmadhavan-g</Link></div>
-                        <div><a href="mailto:arunmadhavan.g@gmail.com"><FontAwesomeIcon icon={faEnvelopeOpen} /> arunmadhavan.g@gmail.com</a></div>
-                        <div id="phone" style={{display:"none"}}className="lg:col-span-3"><a href="callto:+919840808667"><FontAwesomeIcon icon={faPhone} />+91 98408 08667</a></div>
+                    <div className="text-sm lg:grid sm:grid md:grid lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-1 gap-2">
+                        <div className="sm:col-span-4 lg:col-span-1 md:col-span-1"><Link to="https://www.linkedin.com/in/arunmadhavang/"><FontAwesomeIcon icon={faLinkedin} /> @arunmadhavang</Link></div>
+                        <div className="lg:pl-5 md:pl-5 sm:pl-0 lg:col-span-3 md:col-span-3 sm:col-span-4"><Link to="https://techmusings.dev/"><FontAwesomeIcon icon={faPen} /> https://techmusings.dev/</Link></div>
+                        <div className="sm:col-span-4 lg:col-span-1 md:col-span-1"><Link to="https://github.com/arunmadhavan-g"><FontAwesomeIcon icon={faGithub} /> @arunmadhavan-g</Link></div>
+                        <div className="sm:pl-0 col-span-3 lg:pl-5 md:pl-5 sm:col-span-4 lg:col-span-3 md:col-span-3"><a href="mailto:arunmadhavan.g@gmail.com"><FontAwesomeIcon icon={faEnvelopeOpen} /> arunmadhavan.g@gmail.com</a></div>
+                        <div id="phone" style={{display:"none"}} className=""><a href="callto:+919840808667"><FontAwesomeIcon icon={faPhone} />+91 98408 08667</a></div>
                     </div>
+
+                    {/* <div className="text-sm grid grid-cols-4 gap-2">
+                        <div className="col-span-1"><Link to="https://www.linkedin.com/in/arunmadhavang/"><FontAwesomeIcon icon={faLinkedin} /> @arunmadhavang</Link></div>
+                        <div className="pl-5 col-span-3"><Link to="https://techmusings.dev/"><FontAwesomeIcon icon={faPen} /> https://techmusings.dev/</Link></div>
+                        <div className="col-span-1"><Link to="https://github.com/arunmadhavan-g"><FontAwesomeIcon icon={faGithub} /> @arunmadhavan-g</Link></div>
+                        <div className="col-span-3 pl-5"><a href="mailto:arunmadhavan.g@gmail.com"><FontAwesomeIcon icon={faEnvelopeOpen} /> arunmadhavan.g@gmail.com</a></div>
+                        <div id="phone" style={{display:"none"}} className=""><a href="callto:+919840808667"><FontAwesomeIcon icon={faPhone} />+91 98408 08667</a></div>
+                    </div> */}
                 </div>
 
                 <Section title="Summary" className="mt-1">

@@ -8,13 +8,14 @@ const print = () => {
   document.getElementById("header").style.display = "none"
   document.getElementById("footer").style.display = "none"
   document.getElementById("phone").style.display = "block"
+  document.getElementsByTagName("body")[0].style.margin = "-15px 0 0 0"
 
   window.print()
 
   document.getElementById("header").style.display = "block"
   document.getElementById("footer").style.display = "block"
   document.getElementById("phone").style.display = "none"
-
+  document.getElementsByTagName("body")[0].style.margin = "0"
 }
 
 const Header = ({ isContent = false, showPrint = false }) => (
