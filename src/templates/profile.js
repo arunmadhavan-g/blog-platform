@@ -98,13 +98,20 @@ const Content = ({ pageContext: { profileData } }) => {
                             techList.map(x => (
                                 <>      
                                 <div className="text-black border-b border-dashed">{x.label}</div>
-                                <div className="italic col-span-4 border-b border-dashed">{x.value.join(", ")}</div>
+                                <div className="italic col-span-4 border-b border-dashed">{x.value.sort().join(", ")}</div>
                                 </>
                                 )
                             )
                         }
                     </div>
                 </Section>
+
+                <Section title="Achievements" className="mt-1">
+                    <ul className="list-disc pb-0">
+                    {achievements.map(x => <li className="mb-0">{x}</li>)}
+                    </ul>
+                </Section>
+
 
                 <Section title="Company Experience">
                     {
@@ -125,11 +132,7 @@ const Content = ({ pageContext: { profileData } }) => {
                     }
                 </Section>
 
-                <Section title="Achievements" className="mt-1">
-                    <ul className="list-disc pb-0">
-                    {achievements.map(x => <li className="mb-0">{x}</li>)}
-                    </ul>
-                </Section>
+                
 
                 <Section title="Project Summary">
                     {profileDataWithDates

@@ -8,7 +8,7 @@ const print = () => {
   document.getElementById("header").style.display = "none"
   document.getElementById("footer").style.display = "none"
   document.getElementById("phone").style.display = "block"
-  document.getElementsByTagName("body")[0].style.margin = "-15px 0 0 0"
+  document.getElementsByTagName("body")[0].style.margin = "-25px 0 0 0"
 
   window.print()
 
