@@ -48,6 +48,16 @@ const pages = [
       author: "Arun Madhavan",
       tags: ["GCP", "Spring Boot", "Migration", "Architecture"],
       description: "Part 2 of a multi part blog, where I talk about how we built out a migration platform for moving from Azure to GCP",
+    },
+    {
+      owner: "arunmadhavan-g",
+      repo: "blogs",
+      file: "DataAggregationAndEIS.md",
+      title: "How we built an EIS Platform - Part1 : Ingestion of Data",
+      publishedOn: "2021-12-31T23:47:18.088Z",
+      author: "Arun Madhavan",
+      tags: ["AWS", "Data Lake", "Migration", "Architecture"],
+      description: "Part 1 of the blog where we see the path that was taken to build an Enterprise Information System dashboard for our customer",
     }
   ]
   
