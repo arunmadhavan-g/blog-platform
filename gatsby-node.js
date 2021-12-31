@@ -22,7 +22,8 @@ const downloadContent = async (owner, repo, path) => {
 
 const getInfoJson = ({ publishedOn, ...others }) => ({
   ...others,
-  publishedOn: formatDate(publishedOn)
+  publishedOn: formatDate(publishedOn),
+  publishedOnDate: publishedOn
 })
 
 const dataNode = async (createNodeId, page, createContentDigest) => {

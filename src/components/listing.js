@@ -7,23 +7,22 @@ const Listing = () => {
 
     const blogs = useStaticQuery(graphql`
     query MyQuery {
-        allMultiGitSource {
-          edges {
-            node {
-              pageInfo {
-                title
-                tags
-                publishedOn
-                pagePath
-                description
-                location
-              }
-            }
+      allMultiGitSource(sort: {order: DESC, fields: pageInfo___publishedOnDate}) {
+        edges {
+          node {
+            pageInfo {
+                    title
+                    tags
+                    publishedOn
+                    pagePath
+                    description
+                    location
+                  }
           }
         }
       }
+    }
     `).allMultiGitSource.edges.map(x=> x.node.pageInfo);
-    console.log(blogs);
 
     return blogs.map(x => 
         <div className="lg:m-5 sm:m-2 border-b">
