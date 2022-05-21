@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
 import { faEnvelopeOpen } from "@fortawesome/free-regular-svg-icons"
 import { faPhone, faPen, faUser } from "@fortawesome/free-solid-svg-icons";
+import downloadFile from "../files/Arun_Madhavan_g.pdf";
 
 const About = () =>
     <Layout isContent>
@@ -23,7 +24,7 @@ const About = () =>
                         <div><Link to="https://www.linkedin.com/in/arunmadhavang/"><FontAwesomeIcon icon={faLinkedin} /><span className="ml-3">@arunmadhavang</span></Link></div>
                         <div className="lg:col-span-2"><Link to="https://github.com/arunmadhavan-g"><FontAwesomeIcon icon={faGithub} /><span className="ml-3">@arunmadhavan-g</span></Link></div>
                         <div><a href="mailto:arunmadhavan.g@gmail.com"><FontAwesomeIcon icon={faEnvelopeOpen} /><span className="ml-3">arunmadhavan.g@gmail.com</span></a></div>
-                        <div className="lg:col-span-3"><Link to="/Profile"><FontAwesomeIcon icon={faUser} /><span className="ml-3">Profile</span></Link></div>
+                        <div className="lg:col-span-3"><a href={downloadFile} download><FontAwesomeIcon icon={faUser} /><span className="ml-3">Profile</span></a></div>
                     </div>
                 </div>
             </div>
